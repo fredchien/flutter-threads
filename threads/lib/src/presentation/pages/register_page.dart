@@ -1,26 +1,28 @@
 /**
  * @author [Frederic Chien]
  * @email [contato@kyuubi.com.br]
- * @create date 07-07-2023 09:48:54
- * @modify date 07-07-2023 09:48:54
+ * @create date 07-07-2023 12:16:56
+ * @modify date 07-07-2023 12:16:56
  * @desc [description]
  */
 import 'package:flutter/material.dart';
-import 'package:threads/src/presentation/widgets/button.dart';
-import 'package:threads/src/presentation/widgets/text_field.dart';
 
-class LoginPage extends StatefulWidget {
+import '../widgets/button.dart';
+import '../widgets/text_field.dart';
+
+class RegisterPage extends StatefulWidget {
   final Function()? onTap;
-  const LoginPage({super.key, required this.onTap});
+  const RegisterPage({super.key, required this.onTap});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   //text editing controller
   final emailTextController = TextEditingController();
   final passwordTextController = TextEditingController();
+  final passwordConfirmTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
 
                   //welcome message
                   const Text(
-                    'Bem vindos ao Vai na Web Threads',
+                    'Crie agora sua conta',
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -64,6 +66,14 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const SizedBox(height: 10),
 
+                  //input pass
+                  MyTextField(
+                    controller: passwordConfirmTextController,
+                    hintText: "Confirme sua senha",
+                    obscureText: true,
+                  ),
+                  const SizedBox(height: 10),
+
                   //button sign in
                   MyButton(onTap: () => {}, text: "Entrar"),
 
@@ -74,14 +84,14 @@ class _LoginPageState extends State<LoginPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Ainda não é membro?",
+                        "Já é um membro?",
                         style: TextStyle(color: Colors.white, fontSize: 16),
                       ),
                       const SizedBox(width: 4),
                       GestureDetector(
                         onTap: widget.onTap,
                         child: Text(
-                          "Cadastre-se",
+                          "Login",
                           style: TextStyle(
                             color: Colors.yellow,
                             fontSize: 16,

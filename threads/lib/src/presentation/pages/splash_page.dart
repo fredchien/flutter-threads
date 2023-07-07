@@ -20,6 +20,7 @@ class _SplashPageState extends State<SplashPage>
   late Animation colorAnimation;
   late Animation sizeAnimation;
 
+  // navigate to login page
   void initializeSplash() async {
     await Future.delayed(Duration(seconds: 4));
     Navigator.pushReplacementNamed(context, '/login');

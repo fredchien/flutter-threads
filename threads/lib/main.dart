@@ -6,7 +6,7 @@
  * @desc [description]
  */
 import 'package:flutter/material.dart';
-import 'package:threads/src/presentation/pages/login_page.dart';
+import 'package:threads/src/auth/login_or_register.dart';
 import 'package:threads/src/presentation/pages/splash_page.dart';
 
 void main() {
@@ -23,8 +23,8 @@ class MyApp extends StatelessWidget {
       home: SplashPage(),
       initialRoute: '/splash',
       routes: {
-        "/splash": (context) => SplashPage(),
-        "/login": (context) => LoginPage(),
+        "/splash": (context) => const SplashPage(),
+        "/login": (context) => const LoginOrRegister(),
       },
     );
   }
