@@ -18,22 +18,26 @@ class MyButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.yellow,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Center(
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.yellow,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Center(
             child: Text(
-          text,
-          style: TextStyle(
-            color: Color(0xFF2e3192),
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
+              text,
+              style: TextStyle(
+                color: Color(0xFF2e3192),
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
+            ),
           ),
-        )),
+        ),
       ),
     );
   }

@@ -5,6 +5,8 @@
  * @modify date 07-07-2023 12:16:56
  * @desc [description]
  */
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/button.dart';
@@ -23,6 +25,52 @@ class _RegisterPageState extends State<RegisterPage> {
   final emailTextController = TextEditingController();
   final passwordTextController = TextEditingController();
   final passwordConfirmTextController = TextEditingController();
+
+  void signUp() async {
+    //loading
+    showDialog(
+      context: context,
+      builder: (context) => const Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+
+    if (passwordTextController.text != passwordConfirmTextController.text) {
+      Navigator.pop(context);
+      displayMessage("Senhas não conferem");
+      return;
+    }
+
+    //creating user
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              email: emailTextController.text,
+              password: passwordTextController.text);
+
+      FirebaseFirestore.instance
+          .collection("Users")
+          .doc(userCredential.user!.email)
+          .set({
+        "username": emailTextController.text.split('@')[0],
+        "bio": "Empty bio",
+      });
+
+      if (context.mounted) Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+      displayMessage(e.code);
+    }
+  }
+
+  void displayMessage(String message) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(message),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +123,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   const SizedBox(height: 10),
 
                   //button sign in
-                  MyButton(onTap: () => {}, text: "Entrar"),
+                  MyButton(onTap: signUp, text: "Cadastrar"),
 
                   const SizedBox(height: 25),
 
@@ -83,14 +131,14 @@ class _RegisterPageState extends State<RegisterPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      const Text(
                         "Já é um membro?",
                         style: TextStyle(color: Colors.white, fontSize: 16),
                       ),
                       const SizedBox(width: 4),
                       GestureDetector(
                         onTap: widget.onTap,
-                        child: Text(
+                        child: const Text(
                           "Login",
                           style: TextStyle(
                             color: Colors.yellow,

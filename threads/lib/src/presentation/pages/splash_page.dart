@@ -23,7 +23,7 @@ class _SplashPageState extends State<SplashPage>
   // navigate to login page
   void initializeSplash() async {
     await Future.delayed(Duration(seconds: 4));
-    Navigator.pushReplacementNamed(context, '/login');
+    Navigator.pushReplacementNamed(context, '/auth');
   }
 
   @override

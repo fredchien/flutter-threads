@@ -5,6 +5,7 @@
  * @modify date 07-07-2023 09:48:54
  * @desc [description]
  */
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:threads/src/presentation/widgets/button.dart';
 import 'package:threads/src/presentation/widgets/text_field.dart';
@@ -21,6 +22,38 @@ class _LoginPageState extends State<LoginPage> {
   //text editing controller
   final emailTextController = TextEditingController();
   final passwordTextController = TextEditingController();
+
+  void signIn() async {
+    //loading
+    showDialog(
+      context: context,
+      builder: (context) => const Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailTextController.text,
+        password: passwordTextController.text,
+      );
+      //loading pop
+      if (context.mounted) Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+      displayMessage(e.code == 'wrong-password'
+          ? 'Login ou senha inválidos'
+          : 'Informe um e-mail válido');
+    }
+  }
+
+  void displayMessage(String message) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(message),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 10),
 
                   //button sign in
-                  MyButton(onTap: () => {}, text: "Entrar"),
+                  MyButton(onTap: signIn, text: "Entrar"),
 
                   const SizedBox(height: 25),
 
@@ -73,14 +106,14 @@ class _LoginPageState extends State<LoginPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      const Text(
                         "Ainda não é membro?",
                         style: TextStyle(color: Colors.white, fontSize: 16),
                       ),
                       const SizedBox(width: 4),
                       GestureDetector(
                         onTap: widget.onTap,
-                        child: Text(
+                        child: const Text(
                           "Cadastre-se",
                           style: TextStyle(
                             color: Colors.yellow,
