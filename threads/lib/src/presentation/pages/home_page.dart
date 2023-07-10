@@ -8,10 +8,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:threads/src/presentation/pages/ideas_page.dart';
 import 'package:threads/src/presentation/pages/profile_page.dart';
 import 'package:threads/src/presentation/widgets/drawer.dart';
 import 'package:threads/src/presentation/widgets/post.dart';
 import 'package:threads/src/presentation/widgets/text_field.dart';
+
+import '../../utils/helper_methods.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -51,7 +54,17 @@ class _HomePageState extends State<HomePage> {
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ProfilePage(),
+          builder: (context) => const ProfilePage(),
+        ));
+  }
+
+  void goToMyIdeasPage() {
+    Navigator.pop(context);
+
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const IdeasPage(),
         ));
   }
 
@@ -59,11 +72,12 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home page'),
+        title: const Text('Idéias'),
       ),
       drawer: MyDrawer(
         onProfileTap: goToProfilePage,
         onLogoutTap: signOut,
+        onMyIdeasTap: goToMyIdeasPage,
       ),
       body: Center(
         child: Column(
@@ -88,6 +102,7 @@ class _HomePageState extends State<HomePage> {
                           message: post['Message'],
                           user: post['UserEmail'],
                           postId: post.id,
+                          time: formatData(post['TimeStamp']),
                           likes: List<String>.from(post['Likes'] ?? []),
                         );
                       },

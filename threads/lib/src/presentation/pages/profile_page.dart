@@ -68,7 +68,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       backgroundColor: Color(0xFF2e3192),
       appBar: AppBar(
-        title: Text("Profile page"),
+        title: Text("Perfil"),
       ),
       body: StreamBuilder<DocumentSnapshot>(
         stream: FirebaseFirestore.instance
@@ -96,12 +96,12 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 MyTextBox(
                   text: userData["username"],
-                  category: "username",
+                  category: "Usuário",
                   onPressed: () => editField('nome'),
                 ),
                 MyTextBox(
                   text: userData["bio"],
-                  category: "Bio",
+                  category: "Biografia",
                   onPressed: () => editField('biografia'),
                 ),
               ],

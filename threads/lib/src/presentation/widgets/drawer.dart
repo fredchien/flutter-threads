@@ -11,10 +11,12 @@ import 'package:threads/src/presentation/widgets/my_list_tile.dart';
 class MyDrawer extends StatelessWidget {
   final void Function()? onProfileTap;
   final void Function()? onLogoutTap;
+  final void Function()? onMyIdeasTap;
   const MyDrawer({
     super.key,
     required this.onProfileTap,
     required this.onLogoutTap,
+    required this.onMyIdeasTap,
   });
 
   @override
@@ -41,6 +43,11 @@ class MyDrawer extends StatelessWidget {
                 icon: Icons.person,
                 text: "P E R F I L",
                 onTap: onProfileTap,
+              ),
+              MyListTile(
+                icon: Icons.message,
+                text: "M I N H A S  I D É I A S",
+                onTap: onMyIdeasTap,
               ),
             ],
           ),
