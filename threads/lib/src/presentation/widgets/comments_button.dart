@@ -1,3 +1,10 @@
+/**
+ * @author [Frederic Chien]
+ * @email [contato@kyuubi.com.br]
+ * @create date 10-07-2023 15:34:11
+ * @modify date 10-07-2023 15:34:11
+ * @desc [description]
+ */
 import 'package:flutter/material.dart';
 
 class CommentButton extends StatelessWidget {

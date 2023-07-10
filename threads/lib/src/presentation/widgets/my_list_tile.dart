@@ -1,3 +1,10 @@
+/**
+ * @author [Frederic Chien]
+ * @email [contato@kyuubi.com.br]
+ * @create date 10-07-2023 15:34:27
+ * @modify date 10-07-2023 15:34:27
+ * @desc [description]
+ */
 import 'package:flutter/material.dart';
 
 class MyListTile extends StatelessWidget {

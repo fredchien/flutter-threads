@@ -1,3 +1,10 @@
+/**
+ * @author [Frederic Chien]
+ * @email [contato@kyuubi.com.br]
+ * @create date 10-07-2023 15:33:55
+ * @modify date 10-07-2023 15:33:55
+ * @desc [description]
+ */
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
